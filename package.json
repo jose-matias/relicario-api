@@ -4,7 +4,7 @@
   "description": "Relicario - Sistema para venda e troca de livros online",
   "main": "index.js",
   "scripts": {
-    "start": "node app/dist/index.js",
+    "start": "node dist/index.js",
     "dev": "tsc-watch --onSuccess \"node dist/index.js\"",
     "build": "tsc"
   },
