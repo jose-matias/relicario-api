@@ -15,7 +15,7 @@ class AuthorController {
       return res.status(500).json(error);
     }
   }
-  
+
   async store(req: Request, res: Response) {
     try {
       const { name } = req.body;
@@ -58,7 +58,11 @@ class AuthorController {
 
   async delete(req: Request, res: Response) {
     try {
-      await Author.findByIdAndRemove(req.params.id);
+      const author = await Author.findByIdAndRemove(req.params.id);
+
+      if (!author) {
+        return res.status(404).json({ message: 'Author not found' });
+      }
 
       return res.json({ message: 'Author successfully removed' });
     } catch (error) {

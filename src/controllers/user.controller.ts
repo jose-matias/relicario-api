@@ -7,7 +7,7 @@ class UserController {
       const users = await User.find();
 
       console.log(users);
-      
+
       if (!users) {
         return res.status(404).json({ error: 'Users not found' });
       }
@@ -17,7 +17,7 @@ class UserController {
       return res.status(500).json(error);
     }
   }
-  
+
   async store(req: Request, res: Response) {
     try {
       const { email } = req.body;
@@ -60,7 +60,11 @@ class UserController {
 
   async delete(req: Request, res: Response) {
     try {
-      await User.findByIdAndRemove(req.params.id);
+      const user = await User.findByIdAndRemove(req.params.id);
+
+      if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+      }
 
       return res.json({ message: 'User successfully removed' });
     } catch (error) {

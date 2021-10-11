@@ -15,7 +15,7 @@ class CategoryController {
       return res.status(500).json(error);
     }
   }
-  
+
   async store(req: Request, res: Response) {
     try {
       const { name } = req.body;
@@ -58,7 +58,11 @@ class CategoryController {
 
   async delete(req: Request, res: Response) {
     try {
-      await Category.findByIdAndRemove(req.params.id);
+      const category = await Category.findByIdAndRemove(req.params.id);
+
+      if (!category) {
+        return res.status(404).json({ message: 'Category not found' });
+      }
 
       return res.json({ message: 'Category successfully removed' });
     } catch (error) {

@@ -7,7 +7,7 @@ class ReportController {
   async users(req: Request, res: Response) {
     try {
       const users = await User.find().select(['-password']);
-      const response = await JSReport.render('k_lfmZF', { users });
+      const response: any = await JSReport.render('k_lfmZF', { users });
 
       if (response.status !== 200) {
         return res.status(400).send({

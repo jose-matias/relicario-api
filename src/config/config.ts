@@ -13,7 +13,7 @@ export default {
     NAME: process.env.MONGODB_NAME || 'relicario',
   },
   JSReport: {
-    hostname: process.env.JSREPORT_HOST || 'https://josematias.dev/reporting/api/report',
+    hostname: process.env.JSREPORT_HOST || 'https://jsreport.josematias.dev/api/report',
     username: process.env.JSREPORT_USER || 'jose.matias',
     password: process.env.JSREPORT_PASS || 'jmsf@jsreport',
   }

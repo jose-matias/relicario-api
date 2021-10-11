@@ -31,7 +31,7 @@ class BookController {
 
   async show(req: Request, res: Response) {
     try {
-      const book = await Book.findById(req.params.id)
+      const book: any = await Book.findById(req.params.id)
         .populate({ path: '_user' })
         .populate({ path: '_author' })
         .populate({ path: '_category', match: { status: true } });
@@ -58,21 +58,23 @@ class BookController {
     }
   }
 
-  async delete(req: Request, res: Response) {
+  async upload(req: Request, res: Response) {
     try {
-      await Book.findByIdAndRemove(req.params.id);
-
-      return res.json({ message: 'Book successfully removed' });
+      return res.json({ message: 'Cover upload file successfully' });
     } catch (error) {
       return res.status(500).json(error);
     }
   }
 
-  async upload(req: Request, res: Response) {
+  async delete(req: Request, res: Response) {
     try {
-      console.log(req.file);
+      const book = await Book.findByIdAndRemove(req.params.id);
 
-      return res.json({ message: 'Cover upload file successfully' });
+      if (!book) {
+        return res.status(404).json({ message: 'Book not found' });
+      }
+
+      return res.json({ message: 'Book successfully removed' });
     } catch (error) {
       return res.status(500).json(error);
     }
