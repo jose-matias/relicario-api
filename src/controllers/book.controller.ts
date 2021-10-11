@@ -31,7 +31,7 @@ class BookController {
 
   async show(req: Request, res: Response) {
     try {
-      const book = await Book.findById(req.params.id)
+      const book: any = await Book.findById(req.params.id)
         .populate({ path: '_user' })
         .populate({ path: '_author' })
         .populate({ path: '_category', match: { status: true } });

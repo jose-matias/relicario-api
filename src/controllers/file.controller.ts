@@ -5,7 +5,7 @@ class FileController {
     try {
       const { file } = req;
 
-      return res.json({ filename: file.filename });
+      return res.json({ filename: file?.filename });
     } catch (error) {
       return res.status(500).json(error);
     }
