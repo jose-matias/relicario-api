@@ -11,10 +11,6 @@ function createToken(user: IUser) {
 class AuthController {
   async singUp(req: Request, res: Response) {
     try {
-      if (!req.body.email || !req.body.password) {
-        return res.status(400).json({ menssage: 'Email or password incorrect' });
-      }
-
       const user = await User.findOne({ email: req.body.email });
 
       if (user) {
@@ -24,7 +20,10 @@ class AuthController {
       const newUser = new User(req.body);
       await newUser.save();
 
-      return res.status(201).json(newUser);
+      return res.json({
+        user: newUser,
+        token: createToken(newUser),
+      });
     } catch (error) {
       return res.status(500).json(error);
     }
@@ -54,6 +53,7 @@ class AuthController {
   }
 
   async google(req: Request, res: Response) {
+    console.log(req.body);
     const user: any = req.user;
 
     return res.json({
