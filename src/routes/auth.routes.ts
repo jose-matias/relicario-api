@@ -16,7 +16,7 @@ const passportAuth = passport.authenticate("jwt", { session: false });
 
 router.post('/auth/signIn', AuthController.singIn);
 router.post('/auth/signUp', AuthController.singUp);
-router.post('/auth/google', passport.authenticate('google-token', { session: false }), AuthController.google);
+router.post('/auth/google', passport.authenticate('google-token', { session: false }), AuthController.singInWithgoogle);
 router.post('/auth/facebook', passport.authenticate('facebook-token', { session: false }), AuthController.facebook);
 
 /* User */
