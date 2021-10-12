@@ -22,7 +22,7 @@ class AuthController {
 
       return res.json({
         user: newUser,
-        token: createToken(newUser),
+        access_token: createToken(newUser),
       });
     } catch (error) {
       return res.status(500).json(error);
@@ -45,20 +45,20 @@ class AuthController {
     if (isMatch) {
       return res.json({
         user,
-        token: createToken(user),
+        access_token: createToken(user),
       });
     }
 
     return res.status(400).json({ menssage: 'Email or password incorrect' });
   }
 
-  async google(req: Request, res: Response) {
+  async singInWithgoogle(req: Request, res: Response) {
     console.log(req.body);
     const user: any = req.user;
 
     return res.json({
       user,
-      token: createToken(user),
+      access_token: createToken(user),
     });
   }
 
