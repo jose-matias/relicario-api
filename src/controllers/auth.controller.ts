@@ -52,22 +52,29 @@ class AuthController {
     return res.status(400).json({ menssage: 'Email or password incorrect' });
   }
 
-  async singInWithgoogle(req: Request, res: Response) {
-    console.log(req.body);
-    const user: any = req.user;
+  async singInWithGoogle(req: Request, res: Response) {
+    const { name, email, providerId } = req.body;
 
-    return res.json({
-      user,
-      access_token: createToken(user),
+    const userExists = await User.findOne({ providerId });
+
+    if (userExists) {
+      return res.json({
+        user: userExists,
+        access_token: createToken(userExists),
+      });
+    }
+
+    const newUser = await User.create({
+      name,
+      email,
+      provider: 'google',
+      providerId,
+      password: providerId,
     });
-  }
-
-  async facebook(req: Request, res: Response) {
-    const user: any = req.user;
 
     return res.json({
-      user,
-      token: createToken(user),
+      user: newUser,
+      access_token: createToken(newUser),
     });
   }
 };

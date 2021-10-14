@@ -6,8 +6,6 @@ class UserController {
     try {
       const users = await User.find();
 
-      console.log(users);
-
       if (!users) {
         return res.status(404).json({ error: 'Users not found' });
       }
