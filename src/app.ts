@@ -25,8 +25,6 @@ app.use(passport.initialize());
 app.use('/files', express.static(path.resolve(__dirname, '..', 'uploads')));
 
 passport.use(PassportStrategy.local);
-passport.use('google-token', PassportStrategy.google);
-passport.use('facebook-token', PassportStrategy.facebook);
 
 app.all('/', (req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
