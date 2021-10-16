@@ -3,6 +3,7 @@ import passport from 'passport'
 import multer from 'multer';
 import { multerConfig } from '../config/multer'
 
+import DashController from '../controllers/dash.controller';
 import AuthController from '../controllers/auth.controller'
 import UserController from '../controllers/user.controller'
 import BookController from '../controllers/book.controller'
@@ -13,6 +14,8 @@ import FileController from '../controllers/file.controller'
 
 const router = Router();
 const passportAuth = passport.authenticate("jwt", { session: false });
+
+router.get('/dashboard', passportAuth, DashController.index);
 
 router.post('/auth/signIn', AuthController.singIn);
 router.post('/auth/signUp', AuthController.singUp);
