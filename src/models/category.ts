@@ -19,6 +19,6 @@ const CategorySchema: Schema<ICategory> = new Schema({
     type: Boolean,
     default: true,
   },
-});
+}, { timestamps: true });
 
 export default model<ICategory>('Category', CategorySchema);
