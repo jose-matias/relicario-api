@@ -31,7 +31,7 @@ class DashController {
           }
         });
 
-        dates.push({ date: start, users: booksByDay });
+        dates.push({ date: start, books: booksByDay });
       }
 
       return res.json({
@@ -39,7 +39,7 @@ class DashController {
         books,
         categories,
         authors,
-        bookLastWeek: dates,
+        lastAddedBooks: dates,
       });
     } catch (error) {
       return res.status(500).json(error);
