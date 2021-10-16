@@ -78,7 +78,7 @@ const BookSchema: Schema<IBook> = new Schema({
     type: String,
     get: (image: any) => `${process.env.FILES_PATH}/${image}`,
   }
-});
+}, { timestamps: true });
 
 BookSchema.post('find', function(books) {
   books.forEach((book: any) => {

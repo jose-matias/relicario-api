@@ -19,6 +19,6 @@ const AuthorSchema: Schema<IAuthor> = new Schema({
     type: Boolean,
     default: true,
   },
-});
+}, { timestamps: true });
 
 export default model<IAuthor>('Author', AuthorSchema);
