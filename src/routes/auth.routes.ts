@@ -3,7 +3,7 @@ import passport from 'passport'
 import multer from 'multer';
 import { multerConfig } from '../config/multer'
 
-import DashController from '../controllers/dash.controller';
+import DashController from '../controllers/dash.controller'
 import AuthController from '../controllers/auth.controller'
 import UserController from '../controllers/user.controller'
 import BookController from '../controllers/book.controller'
