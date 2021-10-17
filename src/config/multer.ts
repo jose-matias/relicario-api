@@ -1,6 +1,6 @@
 import { Options, diskStorage } from "multer";
 import { randomBytes } from "crypto";
-import { resolve } from "path";
+import { resolve, extname } from "path";
 
 const destination = resolve(__dirname, "..", "..", "uploads");
 
@@ -15,7 +15,9 @@ export const multerConfig: Options = {
         if (error) {
           callback(error, file.filename);
         }
-        const filename = `${hash.toString("hex")}.png`;
+
+        const { bookId } = request.body;
+        const filename = bookId + extname(file.originalname);
         callback(null, filename);
       });
     },
