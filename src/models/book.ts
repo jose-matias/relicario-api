@@ -76,7 +76,7 @@ const BookSchema: Schema<IBook> = new Schema({
   },
   cover: {
     type: String,
-    get: (image: any) => `${process.env.FILES_PATH}/${image}`,
+    get: (image: any) => `${process.env.FILES_PATH}/${image || 'book-cover.png'}`,
   }
 }, { timestamps: true });
 
