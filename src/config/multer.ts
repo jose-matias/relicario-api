@@ -16,8 +16,7 @@ export const multerConfig: Options = {
           callback(error, file.filename);
         }
 
-        const { bookId } = request.body;
-        const filename = bookId + extname(file.originalname);
+        const filename = hash.toString() + extname(file.originalname);
         callback(null, filename);
       });
     },
