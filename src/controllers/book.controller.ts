@@ -5,9 +5,9 @@ class BookController {
   async index(req: Request, res: Response) {
     try {
       const books = await Book.find()
-        .populate({ path: '_user', select: '-_id name' })
-        .populate({ path: '_author', select: '-_id name' })
-        .populate({ path: '_category', select: '-_id name', match: { status: true } });
+        .populate({ path: '_author', select: 'name about' })
+        .populate({ path: '_category', select: 'name about' })
+        .populate({ path: '_publishing', select: 'name site' });
 
       if (!books) {
         return res.status(404).json({ message: 'Books not found' });
@@ -32,9 +32,9 @@ class BookController {
   async show(req: Request, res: Response) {
     try {
       const book: any = await Book.findById(req.params.id)
-        .populate({ path: '_user' })
-        .populate({ path: '_author' })
-        .populate({ path: '_category', match: { status: true } });
+        .populate({ path: '_author', select: 'name about' })
+        .populate({ path: '_category', select: 'name about' })
+        .populate({ path: '_publishing', select: 'name site' });
 
       if (!book) {
         return res.status(404).json({ message: 'Book not found' });

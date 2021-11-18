@@ -1,38 +1,27 @@
-import { model, Schema, Document, Types } from 'mongoose';
+import { model, Schema, Document } from 'mongoose';
 import ObjectId = Schema.Types.ObjectId
 
-export interface IBook extends Document {
-  _user: ObjectId;
-  _category: ObjectId[];
+export interface Book extends Document {
+  status: boolean;
   name: string;
   description?: string;
-  author: string;
-  publisher: string;
   language: string;
   page_qty: number;
   ISBN10: string;
   ISBN13: string;
-  price: number;
-  exchange: boolean;
-  status: string;
-  book_cover: string;
+  location: string;
+  quantity: number;
+  _author: ObjectId;
+  _category: ObjectId[];
+  _publishing: ObjectId;
+  cover: string;
 };
 
-const BookSchema: Schema<IBook> = new Schema({
-  _user: {
-    type: Types.ObjectId,
-    ref: 'User',
-    required: true
-  },
-  _category: [{
-    type: ObjectId,
-    ref: 'Category',
-    required: true
-  }],
-  _author: {
-    type: ObjectId,
-    ref: 'Author',
-    required: true
+const BookSchema: Schema<Book> = new Schema({
+  status: {
+    type: String,
+    enum: ['Disponível', 'Reservado', 'Emprestado'],
+    default: 'Disponível',
   },
   name: {
     type: String,
@@ -40,10 +29,6 @@ const BookSchema: Schema<IBook> = new Schema({
   },
   description: {
     type: String,
-  },
-  publisher: {
-    type: String,
-    required: true,
   },
   language: {
     type: String,
@@ -61,18 +46,28 @@ const BookSchema: Schema<IBook> = new Schema({
     type: String,
     default: null,
   },
-  price: {
+  location: {
+    type: String,
+    required: true,
+  },
+  quantity: {
     type: Number,
     required: true,
   },
-  exchange: {
-    type: Boolean,
-    default: false,
+  _author: {
+    type: ObjectId,
+    ref: 'Author',
+    required: true
   },
-  status: {
-    type: String,
-    enum: ['Publicado', 'Não Publicado'],
-    default: 'Publicado',
+  _category: [{
+    type: ObjectId,
+    ref: 'Category',
+    required: true
+  }],
+  _publishing: {
+    type: ObjectId,
+    ref: 'Publishing',
+    required: true
   },
   cover: {
     type: String,
@@ -86,4 +81,4 @@ BookSchema.post('find', function(books) {
   });
 });
 
-export default model<IBook>('Book', BookSchema);
+export default model<Book>('Book', BookSchema);
