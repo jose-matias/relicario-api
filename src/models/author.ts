@@ -1,12 +1,16 @@
 import { model, Schema, Document } from 'mongoose';
 
-export interface IAuthor extends Document {
+export interface Author extends Document {
+  status: boolean;
   name: string;
   about: string;
-  status: boolean;
 };
 
-const AuthorSchema: Schema<IAuthor> = new Schema({
+const AuthorSchema: Schema<Author> = new Schema({
+  status: {
+    type: Boolean,
+    default: true,
+  },
   name: {
     type: String,
     required: true,
@@ -15,10 +19,6 @@ const AuthorSchema: Schema<IAuthor> = new Schema({
   about: {
     type: String,
   },
-  status: {
-    type: Boolean,
-    default: true,
-  },
 }, { timestamps: true });
 
-export default model<IAuthor>('Author', AuthorSchema);
+export default model<Author>('Author', AuthorSchema);
