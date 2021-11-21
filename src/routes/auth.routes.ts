@@ -9,7 +9,7 @@ import UserController from '../controllers/user.controller';
 import BookController from '../controllers/book.controller';
 import AuthorController from '../controllers/author.controller';
 import CategoryController from '../controllers/category.controller';
-import PublishingController from '../controllers/publishing.controller';
+import PublisherController from '../controllers/publisher.controller';
 import ReserveController from '../controllers/reserve.controller';
 import ReportController from '../controllers/report.controller';
 import FileController from '../controllers/file.controller';
@@ -51,12 +51,12 @@ router.get('/category/:id', passportAuth, CategoryController.show);
 router.put('/category/:id', passportAuth, CategoryController.update);
 router.delete('/category/:id', passportAuth, CategoryController.delete);
 
-/* Publishing */
-router.post('/publishing', passportAuth, PublishingController.store);
-router.get('/publishing', passportAuth, PublishingController.index);
-router.get('/publishing/:id', passportAuth, PublishingController.show);
-router.put('/publishing/:id', passportAuth, PublishingController.update);
-router.delete('/publishing/:id', passportAuth, PublishingController.delete);
+/* Publisher */
+router.post('/publisher', passportAuth, PublisherController.store);
+router.get('/publisher', passportAuth, PublisherController.index);
+router.get('/publisher/:id', passportAuth, PublisherController.show);
+router.put('/publisher/:id', passportAuth, PublisherController.update);
+router.delete('/publisher/:id', passportAuth, PublisherController.delete);
 
 /* Reserve */
 router.post('/reserve', passportAuth, ReserveController.store);

@@ -1,12 +1,12 @@
 import { model, Schema, Document } from 'mongoose';
 
-export interface Publishing extends Document {
+export interface Publisher extends Document {
   status: boolean;
   name: string;
   site: string;
 };
 
-const PublishingSchema: Schema<Publishing> = new Schema({
+const PublisherSchema: Schema<Publisher> = new Schema({
   status: {
     type: Boolean,
     default: true,
@@ -22,4 +22,4 @@ const PublishingSchema: Schema<Publishing> = new Schema({
   },
 }, { timestamps: true });
 
-export default model<Publishing>('Publishing', PublishingSchema);
+export default model<Publisher>('Publisher', PublisherSchema);
