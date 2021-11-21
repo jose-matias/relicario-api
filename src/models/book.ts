@@ -13,7 +13,7 @@ export interface Book extends Document {
   quantity: number;
   _author: ObjectId;
   _category: ObjectId[];
-  _publishing: ObjectId;
+  _publisher: ObjectId;
   cover: string;
 };
 
@@ -67,9 +67,9 @@ const BookSchema: Schema<Book> = new Schema({
     ref: 'Category',
     required: true
   }],
-  _publishing: {
+  _publisher: {
     type: ObjectId,
-    ref: 'Publishing',
+    ref: 'Publisher',
     required: true
   },
   cover: {

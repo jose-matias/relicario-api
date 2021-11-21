@@ -7,7 +7,7 @@ class BookController {
       const books = await Book.find()
         .populate({ path: '_author', select: 'name about' })
         .populate({ path: '_category', select: 'name about' })
-        .populate({ path: '_publishing', select: 'name site' });
+        .populate({ path: '_publisher', select: 'name site' });
 
       if (!books) {
         return res.status(404).json({ message: 'Books not found' });
@@ -34,7 +34,7 @@ class BookController {
       const book: any = await Book.findById(req.params.id)
         .populate({ path: '_author', select: 'name about' })
         .populate({ path: '_category', select: 'name about' })
-        .populate({ path: '_publishing', select: 'name site' });
+        .populate({ path: '_publisher', select: 'name site' });
 
       if (!book) {
         return res.status(404).json({ message: 'Book not found' });
