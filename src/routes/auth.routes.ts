@@ -63,6 +63,7 @@ router.post('/reserve', passportAuth, ReserveController.store);
 router.get('/reserve', passportAuth, ReserveController.index);
 router.get('/reserve/:id', passportAuth, ReserveController.show);
 router.put('/reserve/:id', passportAuth, ReserveController.update);
+router.patch('/reserve/:id', passportAuth, ReserveController.patch);
 router.delete('/reserve/:id', passportAuth, ReserveController.delete);
 
 /* Files */

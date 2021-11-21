@@ -6,8 +6,15 @@ export interface Reserve extends Document {
   _book: ObjectId;
   loan_date: Date;
   return_date: Date;
-  status: boolean;
+  status: string;
 };
+
+enum Status {
+  Disponivel = 'Disponivel',
+  Reservado = 'Reservado',
+  Emprestado = 'Emprestado',
+  Devolvido = 'Devolvido',
+}
 
 const ReserveSchema: Schema<Reserve> = new Schema({
   _user: {
@@ -28,8 +35,8 @@ const ReserveSchema: Schema<Reserve> = new Schema({
   },
   status: {
     type: String,
-    enum: ['Disponível', 'Reservado', 'Emprestado', 'Devolvido'],
-    default: 'Disponível',
+    enum: Status,
+    default: Status.Disponivel,
   },
 }, { timestamps: true });
 

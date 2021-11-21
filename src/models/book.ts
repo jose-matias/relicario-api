@@ -19,9 +19,8 @@ export interface Book extends Document {
 
 const BookSchema: Schema<Book> = new Schema({
   status: {
-    type: String,
-    enum: ['Disponível', 'Reservado', 'Emprestado'],
-    default: 'Disponível',
+    type: Boolean,
+    default: true,
   },
   name: {
     type: String,
@@ -53,6 +52,10 @@ const BookSchema: Schema<Book> = new Schema({
   quantity: {
     type: Number,
     required: true,
+  },
+  available: {
+    type: Number,
+    default: -1,
   },
   _author: {
     type: ObjectId,
