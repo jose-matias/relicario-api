@@ -1,14 +1,14 @@
+require('dotenv').config();
+
 import express from 'express'
 import morgan from 'morgan'
-import * as dotenv from 'dotenv'
 import cors from 'cors'
 import path from 'path'
 import passport from 'passport'
 import PassportStrategy from './middlewares/passport'
 
-import authRoutes from './routes/auth.routes'
 
-dotenv.config();
+import authRoutes from './routes/auth.routes'
 
 // Initializations
 const app = express();
