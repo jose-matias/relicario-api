@@ -72,5 +72,6 @@ router.post('/file', multer(multerConfig).single('file'), FileController.upload)
 
 /* Reports */
 router.get('/report-users', ReportController.users);
+router.get('/report-books', ReportController.books);
 
 export default router;
