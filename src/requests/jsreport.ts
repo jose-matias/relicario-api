@@ -5,7 +5,7 @@ const render = async (shortid: string, reportData: object) => {
   try {
     const options: AxiosRequestConfig = {
       method: "POST",
-      url: config.JSReport.hostname,
+      url: String(config.JSReport.hostname),
       responseType: "arraybuffer",
       data: {
         template: { shortid },
@@ -13,8 +13,8 @@ const render = async (shortid: string, reportData: object) => {
         data: reportData,
       },
       auth: {
-        username: config.JSReport.username,
-        password: config.JSReport.password,
+        username: String(config.JSReport.username),
+        password: String(config.JSReport.password),
       },
     };
 

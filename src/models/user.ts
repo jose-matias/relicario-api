@@ -34,10 +34,6 @@ const UserSchema: Schema<IUser> = new Schema({
     type: String,
     required: true,
   },
-  photo: {
-    type: String,
-    default: null,
-  },
   status: {
     type: Boolean,
     default: true,

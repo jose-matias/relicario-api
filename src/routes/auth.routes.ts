@@ -22,6 +22,7 @@ router.get('/dashboard', passportAuth, DashController.index);
 router.post('/auth/signIn', AuthController.singIn);
 router.post('/auth/signUp', AuthController.singUp);
 router.post('/auth/google', AuthController.singInWithGoogle);
+router.post('/auth/recover-password', AuthController.recoverPassword);
 
 /* User */
 router.post('/user', passportAuth, UserController.store);

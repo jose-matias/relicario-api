@@ -1,11 +1,13 @@
 import { Request, Response } from 'express';
 import User, { IUser } from '../models/user';
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
 import config from '../config/config';
+import Mail from '../requests/nodemailer';
 
 function createToken(user: IUser) {
   const expiryTime = { expiresIn: 86400 };
-  return jwt.sign({ id: user._id, email: user.email }, config.jwtSecret, expiryTime);
+  return jwt.sign({ id: user._id, email: user.email }, String(config.jwtSecret), expiryTime);
 };
 
 class AuthController {
@@ -76,6 +78,30 @@ class AuthController {
       user: newUser,
       access_token: createToken(newUser),
     });
+  }
+
+  async recoverPassword(req: Request, res: Response) {
+    const { email } = req.body;
+
+    const user = await User.findOne({ email });
+
+    if (user) {
+      const password = Math.floor(100000 + Math.random() * 900000).toString();
+
+      const salt = await bcrypt.genSalt(10);
+      const hash = await bcrypt.hash(password, salt);
+      const passwordHash = hash;
+
+      await User.findByIdAndUpdate(user._id, { $set: { password: passwordHash } });
+
+      Mail.to = user.email;
+      Mail.subject = 'Redefinição de senha';
+      Mail.message = `Faça login com a seguinte senha:<br><br>${password}<br><br>Em seguida redefina sua senha no sistema.`;
+
+      Mail.sendMail();
+    }
+
+    return res.json({ menssage: 'Password recovery email sent' });
   }
 };
 
