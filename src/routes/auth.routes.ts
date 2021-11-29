@@ -6,6 +6,7 @@ import { multerConfig } from '../config/multer';
 import DashController from '../controllers/dash.controller';
 import AuthController from '../controllers/auth.controller';
 import UserController from '../controllers/user.controller';
+import AddressController from '../controllers/address.controller';
 import BookController from '../controllers/book.controller';
 import AuthorController from '../controllers/author.controller';
 import CategoryController from '../controllers/category.controller';
@@ -30,6 +31,14 @@ router.get('/user', passportAuth, UserController.index);
 router.get('/user/:id', passportAuth, UserController.show);
 router.put('/user/:id', passportAuth, UserController.update);
 router.delete('/user/:id', passportAuth, UserController.delete);
+router.put('/user/change-password/:id', passportAuth, UserController.changePassword);
+
+/* Address */
+router.post('/address', passportAuth, AddressController.store);
+router.get('/address', passportAuth, AddressController.index);
+router.get('/address/:id', passportAuth, AddressController.show);
+router.put('/address/:id', passportAuth, AddressController.update);
+router.delete('/address/:id', passportAuth, AddressController.delete);
 
 /* Book */
 router.post('/book', passportAuth, BookController.store);

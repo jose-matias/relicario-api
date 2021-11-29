@@ -1,9 +1,10 @@
-import { model, Schema, Document, Model } from 'mongoose';
+import { model, Schema, Document } from 'mongoose';
+import ObjectId = Schema.Types.ObjectId
 import bcrypt from 'bcrypt';
 
 export interface IUser extends Document {
   name: string;
-  birthday: Date;
+  birthday: string;
   email: string;
   password: string;
   photo: string;
@@ -11,6 +12,7 @@ export interface IUser extends Document {
   role: string;
   facebookId: string;
   googleId: string;
+  _address: ObjectId;
   comparePasswords: (password: string) => Promise<boolean>;
 };
 
@@ -20,7 +22,7 @@ const UserSchema: Schema<IUser> = new Schema({
     required: true,
   },
   birthday: {
-    type: Date,
+    type: String,
     default: null,
   },
   email: {
@@ -49,6 +51,10 @@ const UserSchema: Schema<IUser> = new Schema({
   providerId: {
     type: String,
     default: null,
+  },
+  _address: {
+    type: ObjectId,
+    ref: 'Address',
   },
 }, { timestamps: true });
 

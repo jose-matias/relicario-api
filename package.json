@@ -1,7 +1,7 @@
 {
   "name": "relicario-api",
   "version": "1.0.0",
-  "description": "Relicario - Sistema para venda e troca de livros online",
+  "description": "Relicario - Sistema para gerenciamento de bibliotecas",
   "main": "index.js",
   "scripts": {
     "start": "node dist/index.js",
@@ -11,8 +11,7 @@
   "keywords": [
     "System",
     "Book",
-    "Sale",
-    "Exchange"
+    "Management"
   ],
   "author": "José Matias Filho",
   "license": "ISC",
