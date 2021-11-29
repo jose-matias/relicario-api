@@ -36,8 +36,8 @@ app.all('/', (req, res, next) => {
 app.get('/', (req, res) => {
   res.json({
     'project-name': 'relicario-api',
-    'description': 'API para sistema de venda e troca de livros',
-    'runing-on': `http://localhost:${app.get('port')}/`,
+    'description': 'API para sistema de gerenciamento de bibliotecas',
+    'link': `https://relicario-api.josematias.dev/`,
   });
 });
 
