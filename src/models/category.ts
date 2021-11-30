@@ -1,12 +1,12 @@
 import { model, Schema, Document } from 'mongoose';
 
-export interface ICategory extends Document {
+export interface Category extends Document {
   name: string;
   about: string;
   status: boolean;
 };
 
-const CategorySchema: Schema<ICategory> = new Schema({
+const CategorySchema: Schema<Category> = new Schema({
   name: {
     type: String,
     required: true,
@@ -21,4 +21,4 @@ const CategorySchema: Schema<ICategory> = new Schema({
   },
 }, { timestamps: true });
 
-export default model<ICategory>('Category', CategorySchema);
+export default model<Category>('Category', CategorySchema);
