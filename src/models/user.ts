@@ -2,21 +2,20 @@ import { model, Schema, Document } from 'mongoose';
 import ObjectId = Schema.Types.ObjectId
 import bcrypt from 'bcrypt';
 
-export interface IUser extends Document {
+export interface User extends Document {
   name: string;
   birthday: string;
   email: string;
   password: string;
-  photo: string;
   status: boolean;
   role: string;
-  facebookId: string;
-  googleId: string;
+  provider: string;
+  providerId: string;
   _address: ObjectId;
   comparePasswords: (password: string) => Promise<boolean>;
 };
 
-const UserSchema: Schema<IUser> = new Schema({
+const UserSchema: Schema<User> = new Schema({
   name: {
     type: String,
     required: true,
@@ -76,4 +75,4 @@ UserSchema.methods.comparePasswords = async function (password: string): Promise
   return await bcrypt.compare(password, user.password);
 };
 
-export default model<IUser>('User', UserSchema);
+export default model<User>('User', UserSchema);
