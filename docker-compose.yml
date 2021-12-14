@@ -7,8 +7,8 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - ".:/app"
-      - "/app/node_modules"
-      - "/app/dist"
+      - ".:/usr/src/app"
+    environment:
+      - PORT=8080
     ports:
-      - 2021:2021
+      - 8080:8080

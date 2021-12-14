@@ -1,13 +1,24 @@
-FROM node:14-alpine
+FROM node:16-slim as BUILDER
+LABEL maintainer="José Matias"
 
-WORKDIR /app
+WORKDIR /usr/src/app
 
 COPY package.json ./
+COPY tsconfig.json ./
 
-RUN yarn
+RUN npm install
+COPY src ./src
+RUN npm run build
 
-COPY . .
+FROM node:16-alpine
 
-RUN yarn build
+ARG NODE_ENV
+ENV NODE_PATH=./build
 
-CMD ["yarn", "start"]
+WORKDIR /usr/src/app
+
+COPY --from=BUILDER /usr/src/app/ ./
+
+EXPOSE 3000
+
+CMD ["npm", "run", "start"]
