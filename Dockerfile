@@ -1,4 +1,5 @@
-FROM node:16-slim as BUILDER
+# Build stage
+FROM node:16-slim as build
 LABEL maintainer="José Matias"
 
 WORKDIR /usr/src/app
@@ -10,6 +11,7 @@ RUN npm install
 COPY src ./src
 RUN npm run build
 
+# Run stage
 FROM node:16-alpine
 
 ARG NODE_ENV
@@ -17,8 +19,8 @@ ENV NODE_PATH=./build
 
 WORKDIR /usr/src/app
 
-COPY --from=BUILDER /usr/src/app/ ./
+COPY --from=build /usr/src/app/ ./
 
 EXPOSE 3000
 
-CMD ["npm", "run", "start"]
+CMD ["node", "dist/index.js"]
