@@ -26,7 +26,7 @@ class AuthorController {
 
       const author = await Author.create(req.body);
 
-      return res.json({ author });
+      return res.json(author);
     } catch (error) {
       return res.status(500).json(error);
     }
