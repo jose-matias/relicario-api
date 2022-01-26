@@ -13,6 +13,7 @@ import CategoryController from '../controllers/category.controller';
 import PublisherController from '../controllers/publisher.controller';
 import ReserveController from '../controllers/reserve.controller';
 import ReportController from '../controllers/report.controller';
+import SuggestionController from '../controllers/suggestion.controller';
 import FileController from '../controllers/file.controller';
 
 const router = Router();
@@ -75,6 +76,13 @@ router.get('/reserve/:id', passportAuth, ReserveController.show);
 router.put('/reserve/:id', passportAuth, ReserveController.update);
 router.patch('/reserve/:id', passportAuth, ReserveController.patch);
 router.delete('/reserve/:id', passportAuth, ReserveController.delete);
+
+/* Suggestion */
+router.post('/suggestion', passportAuth, SuggestionController.store);
+router.get('/suggestion', passportAuth, SuggestionController.index);
+router.get('/suggestion/:id', passportAuth, SuggestionController.show);
+router.put('/suggestion/:id', passportAuth, SuggestionController.update);
+router.delete('/suggestion/:id', passportAuth, SuggestionController.delete);
 
 /* Files */
 router.post('/file', multer(multerConfig).single('file'), FileController.upload);
