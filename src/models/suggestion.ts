@@ -9,7 +9,7 @@ export interface Suggestion extends Document {
 const SuggestionSchema: Schema<Suggestion> = new Schema({
   status: {
     type: Boolean,
-    default: true,
+    default: false,
   },
   name: {
     type: String,
