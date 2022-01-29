@@ -9,6 +9,6 @@ services:
     volumes:
       - ".:/usr/src/app"
     environment:
-      - PORT=8080
+      - PORT=3700
     ports:
-      - 8080:8080
+      - 3700:3700

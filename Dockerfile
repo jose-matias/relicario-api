@@ -21,6 +21,6 @@ WORKDIR /usr/src/app
 
 COPY --from=build /usr/src/app/ ./
 
-EXPOSE 2021
+EXPOSE 3700
 
 CMD ["node", "dist/index.js"]
