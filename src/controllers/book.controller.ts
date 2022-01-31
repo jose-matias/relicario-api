@@ -23,7 +23,7 @@ class BookController {
     try {
       const book = await Book.create(req.body);
 
-      return res.json({ book });
+      return res.json(book);
     } catch (error) {
       return res.status(500).json(error);
     }
