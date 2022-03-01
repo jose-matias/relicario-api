@@ -1,4 +1,4 @@
-name: relicario-api CI
+name: cicd-backend
 
 on:
   push:
@@ -8,8 +8,7 @@ on:
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     strategy:
       matrix:
@@ -21,6 +20,16 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm ci
-      - run: npm run build --if-present
 
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build project
+        run: npm run build --if-present
+
+      - name: Stop PM2
+        run: pm2 stop relicario-api
+        if: ${{failure()}}
+
+      - name: Start PM2
+        run: pm2 start dist/index.js --name relicario-api
