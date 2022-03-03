@@ -2,13 +2,13 @@ name: cicd-backend
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
@@ -16,20 +16,26 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - run: git fetch --prune --unshallow
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
 
       - name: Install dependencies
-        run: npm install
+        run: yarn --frozen-lockfile
 
       - name: Build project
-        run: npm run build --if-present
+        run: yarn build --if-present
 
-      - name: Stop PM2
-        run: pm2 stop relicario-api
-        if: ${{failure()}}
+      - shell: bash
+        if: github.ref == 'refs/heads/main'
+        name: Create SSH deployment key
+        env:
+          SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: ./scripts/deploy.sh
 
-      - name: Start PM2
-        run: pm2 start dist/index.js --name relicario-api
+      - name: Deployment | Copy file via ssh
+        if: github.ref == 'refs/heads/main'
+        run: scp -r ../dist backend@josematias.dev:/home/backend/
