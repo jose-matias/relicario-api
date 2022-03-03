@@ -27,7 +27,7 @@ jobs:
         run: yarn --frozen-lockfile
 
       - name: Build project
-        run: yarn build --if-present
+        run: yarn build
 
       - shell: bash
         if: github.ref == 'refs/heads/main'
