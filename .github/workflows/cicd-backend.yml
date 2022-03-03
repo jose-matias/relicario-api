@@ -38,4 +38,4 @@ jobs:
 
       - name: Deployment | Copy file via ssh
         if: github.ref == 'refs/heads/main'
-        run: scp -r ../dist backend@josematias.dev:/home/backend/
+        run: scp -r /home/runner/relicario-api/dist backend@josematias.dev:/home/backend/
