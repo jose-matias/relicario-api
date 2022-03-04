@@ -36,6 +36,6 @@ jobs:
           SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: ./scripts/deploy.sh
 
-      - name: Deployment | Copy file via ssh
+      - name: Deploy with rsync
         if: github.ref == 'refs/heads/main'
-        run: scp -r /home/runner/relicario-api/dist root@josematias.dev:/home/backend/
+        run: rsync -avz ./dist/ backend@josematias.dev:/home/backend/relicario-api/dist/

@@ -1,5 +1,5 @@
 mkdir -p ~/.ssh
-echo -e "${SSH_KEY}" > ~/.ssh/id_ed25519
-chmod 600 ~/.ssh/id_ed25519
+echo -e "${SSH_KEY}" > ~/.ssh/id_rsa
+chmod 600 ~/.ssh/id_rsa
 
-ssh-keyscan -p 22 -t ed25519 josematias.dev 2>&1 >> ~/.ssh/known_hosts
+ssh-keyscan -H josematias.dev >> ~/.ssh/known_hosts
