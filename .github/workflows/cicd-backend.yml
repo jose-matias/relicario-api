@@ -38,4 +38,4 @@ jobs:
 
       - name: Deploy with rsync
         if: github.ref == 'refs/heads/main'
-        run: rsync -avz ./dist/ backend@josematias.dev:/home/backend/relicario-api/dist/
+        run: rsync -avz ./dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/backend/relicario-api/dist/
