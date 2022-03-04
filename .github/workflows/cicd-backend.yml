@@ -33,6 +33,7 @@ jobs:
         if: github.ref == 'refs/heads/main'
         name: Create SSH deployment key
         env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
           SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: ./scripts/deploy.sh
 
