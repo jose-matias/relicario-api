@@ -8,4 +8,4 @@ export PATH=$PATH:/usr/bin
 
 which rsync || ( apt-get update -y && apt-get install rsync -y )
 
-rsync -avz ./dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/backend/relicario-api/dist/
+rsync -avz ./dist/ ${SSH_USER}@${SSH_HOST}:/home/backend/relicario-api/dist/
