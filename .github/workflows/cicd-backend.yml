@@ -38,6 +38,9 @@ jobs:
           SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: ./scripts/deploy.sh
 
+      - name: Install rsync
+        run: which rsync || ( apt-get update -y && apt-get install rsync -y )
+
       - name: Deploy with rsync
         if: github.ref == 'refs/heads/main'
         run: rsync -avz ./dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/backend/relicario-api/dist/
