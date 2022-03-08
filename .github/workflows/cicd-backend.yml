@@ -41,8 +41,11 @@ jobs:
       - name: Teste conexão
         run: ssh -p22 ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "/usr/bin/ls -all"
 
+      - name: List files
+        run: ls -all
+
       - name: Install Rsync
         run: which rsync || ( apt-get update -y && apt-get install rsync -y )
 
       - name: Deploy with rsync
-        run: rsync -rav --delete ./dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/backend/dist/
+        run: rsync -rav --delete ./dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/root/backend/dist/
