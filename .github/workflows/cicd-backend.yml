@@ -43,7 +43,12 @@ jobs:
         if: ${{failure()}}
 
       - name: Deploy with rsync
-        run: rsync -rav --delete ./dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/root/backend/dist/
+        run: |
+          rsync -rav --delete ./dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/root/backend/dist/
+          rsync -rav --delete ./package.json ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/root/backend/
+
+      - name: Install dependencies on server
+        run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'yarn'
 
       - name: Start PM2
         run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'pm2 start backend/dist/index.js --name relicario-api'
