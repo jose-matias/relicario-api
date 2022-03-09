@@ -38,14 +38,12 @@ jobs:
       - name: Adding Known Hosts
         run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
-      - name: Teste conexão
-        run: ssh -p22 ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "/usr/bin/ls -all"
-
-      - name: List files
-        run: ls -all
-
-      - name: Install Rsync
-        run: which rsync || ( apt-get update -y && apt-get install rsync -y )
+      - name: Stop PM2
+        run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'pm2 stop relicario-api'
+        if: ${{failure()}}
 
       - name: Deploy with rsync
         run: rsync -rav --delete ./dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/root/backend/dist/
+
+      - name: Start PM2
+        run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'pm2 start backend/dist/index.js --name relicario-api'
