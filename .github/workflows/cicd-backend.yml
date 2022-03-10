@@ -51,4 +51,4 @@ jobs:
         run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'yarn'
 
       - name: Start PM2
-        run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'pm2 start backend/dist/index.js --name relicario-api'
+        run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'yarn start:prod'
