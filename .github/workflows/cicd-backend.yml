@@ -51,4 +51,4 @@ jobs:
         run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'yarn'
 
       - name: Start PM2
-        run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'yarn start:prod'
+        run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'cd backend && yarn start:prod'
