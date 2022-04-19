@@ -16,13 +16,14 @@ const app = express();
 // settings
 app.set('port', process.env.SERVER_PORT || 3700);
 
+const whitelist = ['https://relicario.josematias.dev'];
+
 // Middlewares
 app.use(
   cors({
-    origin: '*',
+    origin: whitelist,
     methods: "GET, POST, PATCH, DELETE, PUT",
     allowedHeaders: "Content-Type, Authorization",
-
   })
 );
 
@@ -34,11 +35,13 @@ app.use('/files', express.static(path.resolve(__dirname, '..', 'uploads')));
 
 passport.use(PassportStrategy.local);
 
+/*
 app.all('/', (req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
   next()
 });
+*/
 
 // Routes
 app.get('/', (req, res) => {
