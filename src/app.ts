@@ -35,14 +35,6 @@ app.use('/files', express.static(path.resolve(__dirname, '..', 'uploads')));
 
 passport.use(PassportStrategy.local);
 
-/*
-app.all('/', (req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With");
-  next()
-});
-*/
-
 // Routes
 app.get('/', (req, res) => {
   res.json({
