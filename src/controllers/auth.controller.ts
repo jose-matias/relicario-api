@@ -57,12 +57,6 @@ class AuthController {
   async singInWithGoogle(req: Request, res: Response) {
     const { name, email, providerId } = req.body;
 
-    console.log({
-      name,
-      email,
-      providerId,
-    });
-
     const userExists = await User.findOne({ providerId });
 
     if (userExists) {

@@ -16,16 +16,8 @@ const app = express();
 // settings
 app.set('port', process.env.SERVER_PORT || 3700);
 
-const whitelist = ['https://relicario.josematias.dev'];
-
 // Middlewares
-app.use(
-  cors({
-    origin: whitelist,
-    methods: "GET, POST, PATCH, DELETE, PUT",
-    allowedHeaders: "Content-Type, Authorization",
-  })
-);
+app.use(cors());
 
 // app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: false }));
