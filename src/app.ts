@@ -17,7 +17,15 @@ const app = express();
 app.set('port', process.env.SERVER_PORT || 3700);
 
 // Middlewares
-app.use(cors());
+app.use(
+  cors({
+    origin: '*',
+    methods: "GET, POST, PATCH, DELETE, PUT",
+    allowedHeaders: "Content-Type, Authorization",
+
+  })
+);
+
 // app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
