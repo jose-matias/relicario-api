@@ -2,13 +2,14 @@ require('dotenv').config();
 
 import express from 'express'
 import morgan from 'morgan'
-import cors from 'cors'
+//import cors from 'cors'
 import path from 'path'
 import passport from 'passport'
 import PassportStrategy from './middlewares/passport'
 
-
 import authRoutes from './routes/auth.routes'
+
+const cors = require('cors')
 
 // Initializations
 const app = express();
@@ -17,7 +18,14 @@ const app = express();
 app.set('port', process.env.SERVER_PORT || 3700);
 
 // Middlewares
-app.use(cors());
+app.use(
+  cors({
+    origin: '*',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
+  })
+);
 
 // app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: false }));
