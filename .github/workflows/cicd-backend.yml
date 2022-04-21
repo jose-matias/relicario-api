@@ -44,11 +44,11 @@ jobs:
 
       - name: Deploy with rsync
         run: |
-          rsync -rav --delete ./dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/root/backend/dist/
-          rsync -rav --delete ./package.json ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/root/backend/
+          rsync -rav ./dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/root/backend/dist/
+          rsync -rav ./package.json ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/root/backend/
 
       - name: Install dependencies on server
         run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'yarn'
 
       - name: Start PM2
-        run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'cd backend && yarn start:prod'
+        run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'cd backend && yarn restart:prod'
