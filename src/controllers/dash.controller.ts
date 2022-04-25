@@ -13,26 +13,50 @@ class DashController {
   async index(req: Request, res: Response) {
     try {
       const activeUsers = await User.countDocuments({ status: true });
-      const inactiveUsers = await User.countDocuments({ status: false });
       const books = await Book.countDocuments();
       const authors = await Author.countDocuments();
       const categories = await Category.countDocuments();
       const publishers = await Publisher.countDocuments();
       const suggestions = await Suggestion.countDocuments();
-      const suggestionReview = await Suggestion.countDocuments({ status: true });
       const reserves = await Reserve.countDocuments();
+
+      const inactiveUsers = await User.countDocuments({ status: false });
+      const suggestionReview = await Suggestion.countDocuments({ status: true });
       const confirmateReserves = await Reserve.countDocuments({ status: 'Reservado' });
 
       return res.json({
-        activeUsers,
+        dataGraph: [
+          {
+            type: 'Usuários',
+            value: activeUsers,
+          },
+          {
+            type: 'Livros',
+            value: books,
+          },
+          {
+            type: 'Autores',
+            value: authors,
+          },
+          {
+            type: 'Categorias',
+            value: categories,
+          },
+          {
+            type: 'Editoras',
+            value: publishers,
+          },
+          {
+            type: 'Sugestões',
+            value: suggestions,
+          },
+          {
+            type: 'Reservas',
+            value: reserves,
+          }
+        ],
         inactiveUsers,
-        books,
-        authors,
-        categories,
-        publishers,
-        suggestions,
         suggestionReview,
-        reserves,
         confirmateReserves,
       });
     } catch (error) {
