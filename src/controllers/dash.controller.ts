@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-import { startOfDay, endOfDay } from 'date-fns';
 
 import User from '../models/user';
 import Book from '../models/book';
@@ -22,7 +21,8 @@ class DashController {
 
       const inactiveUsers = await User.countDocuments({ status: false });
       const suggestionReview = await Suggestion.countDocuments({ status: true });
-      const confirmateReserves = await Reserve.countDocuments({ status: 'Reservado' });
+      const availableBooks = await Reserve.countDocuments({ status: 'Disponivel' });
+      const borrowedBooks = await Reserve.countDocuments({ status: 'Emprestado' });
 
       return res.json({
         dataGraph: [
@@ -57,7 +57,8 @@ class DashController {
         ],
         inactiveUsers,
         suggestionReview,
-        confirmateReserves,
+        availableBooks,
+        borrowedBooks,
       });
     } catch (error) {
       return res.status(500).json(error);
