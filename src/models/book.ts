@@ -78,7 +78,7 @@ const BookSchema: Schema<Book> = new Schema({
   }
 }, { timestamps: true });
 
-BookSchema.post('find', function(books) {
+BookSchema.post('find', function (books) {
   books.forEach((book: any) => {
     book.cover = book.cover;
   });
