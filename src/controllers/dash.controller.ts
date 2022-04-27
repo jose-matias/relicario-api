@@ -11,6 +11,9 @@ import Reserve from '../models/reserve';
 class DashController {
   async index(req: Request, res: Response) {
     try {
+      const now = new Date();
+      const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
       const activeUsers = await User.countDocuments({ status: true });
       const books = await Book.countDocuments();
       const authors = await Author.countDocuments();
@@ -21,8 +24,8 @@ class DashController {
 
       const inactiveUsers = await User.countDocuments({ status: false });
       const suggestionReview = await Suggestion.countDocuments({ status: true });
-      const availableBooks = await Reserve.countDocuments({ status: 'Disponivel' });
-      const borrowedBooks = await Reserve.countDocuments({ status: 'Emprestado' });
+      const reservedBooks = await Reserve.countDocuments({ status: 'Reservado', updatedAt: { $gte: startOfToday } });
+      const borrowedBooks = await Reserve.countDocuments({ status: 'Emprestado', updatedAt: { $gte: startOfToday } });
 
       return res.json({
         dataGraph: [
@@ -57,7 +60,7 @@ class DashController {
         ],
         inactiveUsers,
         suggestionReview,
-        availableBooks,
+        reservedBooks,
         borrowedBooks,
       });
     } catch (error) {
