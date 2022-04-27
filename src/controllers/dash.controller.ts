@@ -27,31 +27,31 @@ class DashController {
       return res.json({
         dataGraph: [
           {
-            type: 'Usuários',
+            label: 'Usuários',
             value: activeUsers,
           },
           {
-            type: 'Livros',
+            label: 'Livros',
             value: books,
           },
           {
-            type: 'Autores',
+            label: 'Autores',
             value: authors,
           },
           {
-            type: 'Categorias',
+            label: 'Categorias',
             value: categories,
           },
           {
-            type: 'Editoras',
+            label: 'Editoras',
             value: publishers,
           },
           {
-            type: 'Sugestões',
+            label: 'Sugestões',
             value: suggestions,
           },
           {
-            type: 'Reservas',
+            label: 'Reservas',
             value: reserves,
           }
         ],
